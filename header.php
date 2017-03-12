@@ -39,7 +39,7 @@
 			<?php
 			endif; ?>
 			<div class="logo">
-				<img src="/wp-content/uploads/MCEN_logo_1x.png"/>
+				<a href="/"><img src="/wp-content/uploads/MCEN_logo_1x.png"/></a>
 			</div>
 			<div class="picto-mobile">
 				<img src="/wp-content/uploads/MCEN_picto.png"/>

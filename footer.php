@@ -21,7 +21,7 @@
 				}
 			?>
 		</div>
-		
+		<!--
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'mcen_s' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'mcen_s' ), 'WordPress' ); ?></a>
 			<span class="sep"> | </span>

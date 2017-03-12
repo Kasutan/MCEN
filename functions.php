@@ -158,6 +158,10 @@ add_filter( 'jpeg_quality', create_function( '', 'return 100;' ) );
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 
+//Empêcher l'ajout automatique de paragraphes
+remove_filter( 'the_content', 'wpautop' );
+remove_filter( 'the_excerpt', 'wpautop' );
+
 //Zone de widgets pour le footer
 if (function_exists('register_sidebar')) {
  register_sidebar(array(
