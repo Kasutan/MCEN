@@ -47,6 +47,13 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.io/normalize.css/
 	## Galleries
 --------------------------------------------------------------*/
 
+:root {
+	--main-color: #A80150;
+	--accent-color:#f59e00;
+	--text-color:#4b4b4b;
+	--back-color: #f5f5f5;
+}
+
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
@@ -311,6 +318,7 @@ h3 {
 }
 
 p {
+	margin-top:0px;
 	margin-bottom: 9px;
 }
 
@@ -456,11 +464,32 @@ hr {
 
 ul,
 ol {
-	margin: 0 0 1.5em 3em;
+	margin-left: 0 ;
+	padding-left:0;
 }
 
 ul {
-	list-style: disc;
+	list-style: none;
+}
+
+.content-area ul > li:before {
+	content: "\e905";
+	 font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	color:#f59e00;
+	padding-right:6px;
+	font-size: 10px;
+	position:relative;
+	top:-1px
 }
 
 ol {
@@ -472,6 +501,7 @@ li > ol {
 	margin-bottom: 0;
 	margin-left: 1.5em;
 }
+
 
 dt {
 	font-weight: bold;
@@ -587,17 +617,17 @@ textarea {
 ## Links
 --------------------------------------------------------------*/
 a {
-	color: var(--text-color);
+	color: #4b4b4b;
 }
 
 a:visited {
-	color: purple;
+	
 }
 
 a:hover,
 a:focus,
 a:active {
-	color: var(--main-color);
+	color: #A80150;
 }
 
 a:focus {
@@ -610,7 +640,7 @@ a:active {
 }
 
 a.bouton, a.cn-set-cookie {
-	background-color:var(--accent-color);
+	background-color:#f59e00;
 	color:#fff;
 /*	font-family: "Roboto Condensed";*/
 	font-size:0.8em;
@@ -644,7 +674,7 @@ a.bouton:after {
 
 a.bouton:hover, a.bouton:focus, a.cn-set-cookie:hover, a.cn-set-cookie:focus {
 	background-color: #fff;
-	color:var(--accent-color);
+	color:#f59e00;
 }
 a.cn-set-cookie {
 	padding:5px;
@@ -664,12 +694,12 @@ a[href$=".pdf"] {
 }
 
 a[href$=".pdf"] span {
-	  border-bottom : solid 1px var(--accent-color);
+	  border-bottom : solid 1px #f59e00;
 }
 
 a[href$=".pdf"]:hover span {
 	  color:#fff;
-	 background-color:var(--accent-color);
+	 background-color:#f59e00;
 		 padding:0px 3px;
 }
 
@@ -686,7 +716,7 @@ a[href$=".pdf"]:before {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: "\e904";
-	color:var(--accent-color);
+	color:#f59e00;
 	padding-right:5px;
 	font-size:12px
 }
@@ -696,13 +726,6 @@ a[href$=".pdf"]:before {
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
-:root {
-	--main-color: #A80150;
-	--accent-color:#f59e00;
-	--text-color:#4b4b4b;
-	--back-color: #f5f5f5;
-}
-
 .menu-toggle {
 	background-image: url("/wp-content/uploads/PICTO_menu.png");
 	background-size: contain;
@@ -719,7 +742,9 @@ a[href$=".pdf"]:before {
 	display: block;
 	float: left;
 	width: 100%;
-	background-color: var(--main-color);
+	background-color: #A80150;
+	background-image: -webkit-linear-gradient(left, #de004e 0%, #b3043e 100%);
+	background-image: linear-gradient(90deg, #de004e 0%, #b3043e 100%);
 		
 }
 
@@ -740,7 +765,7 @@ a[href$=".pdf"]:before {
 	
 }
 .main-navigation ul li {
-		padding : 5px 13px;
+		padding : 5px 8px;
 	}
 
 .main-navigation li.menu-item-has-children>a:after {
@@ -832,6 +857,7 @@ a[href$=".pdf"]:before {
 	
 	.main-navigation {
 		background-color:transparent;
+		background-image:none;
 		min-height:60px;
 		padding:30px 10px;
 	}
@@ -846,18 +872,19 @@ a[href$=".pdf"]:before {
 		        flex-direction:row;
 		-ms-flex-pack: distribute;
 		    justify-content: space-around;
-		flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
 	}
 	
 
   .main-navigation a {
-	color:var(--text-color);
+	color:#4b4b4b;
 		
   }
 	
 	.main-navigation li:hover > a,
 .main-navigation li.focus > a {
-	color: var(--main-color);
+	color: #A80150;
 	
 }
 	
@@ -865,7 +892,7 @@ a[href$=".pdf"]:before {
 	.main-navigation .current-menu-item > a,
 	.main-navigation .current_page_ancestor > a,
 	.main-navigation .current-menu-ancestor > a {
-		color:var(--main-color)
+		color:#A80150
 	}
 	
 	.sub-menu {
@@ -1078,56 +1105,88 @@ a[href$=".pdf"]:before {
 	}
 
 	/*Sticky header*/
-	/* A vérifier avec la typographie définitive + effet du zoom? */
+	/* A vérifier avec la typographie définitive + effet du zoom ? Sur tous navigateurs */
 	.site-header {
 		position: fixed;
 		background: #fff;
-		height:240px;
+		height:195px;
 		z-index:100;
 	}
 	
 	.site-content {
-		padding-top:240px
+		padding-top:195px;
 	}
 }
 
-@media screen and (min-width:1130px) {
-	.site-header {
-		height:195px
-	}
-	.site-content {
-		padding-top:195px
-	}
-
-}
 /*--------------------------------------------------------------
 ## Layout
 --------------------------------------------------------------*/
 .container {
-	max-width:1920px;
+	max-width:960px;
 	padding : 0px 30px 46px 30px;
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .flex-column {
+	display:-webkit-box;
+	display:-ms-flexbox;
 	display:flex;
-	flex-direction:column;
-	align-items : center;
+	-webkit-box-orient:vertical;
+	-webkit-box-direction:normal;
+	    -ms-flex-direction:column;
+	        flex-direction:column;
+	-webkit-box-align : center;
+	    -ms-flex-align : center;
+	        align-items : center;
+	
 }
 
 @media screen and (min-width:768px) {
 	.flex-column {
-		flex-direction:row;
-		justify-content:space-around;
-		align-items:stretch;
+		-webkit-box-orient:horizontal;
+		-webkit-box-direction:normal;
+		    -ms-flex-direction:row;
+		        flex-direction:row;
+		-ms-flex-pack:distribute;
+		    justify-content:space-around;
+		-webkit-box-align:stretch;
+		    -ms-flex-align:stretch;
+		        align-items:stretch;
 	}
 
 	.flex-column.1-1 > div {
 		max-width:435px;
-		flex-basis:435px;
-		flex-shrink:1;
+		-ms-flex-preferred-size:435px;
+		    flex-basis:435px;
+		-ms-flex-negative:1;
+		    flex-shrink:1;
 	}
 }
 
+.flex-column > div {
+	display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex;
+	-webkit-box-orient:vertical;
+	-webkit-box-direction:normal;
+	    -ms-flex-direction:column;
+	        flex-direction:column;
+	-webkit-box-align:center;
+	    -ms-flex-align:center;
+	        align-items:center;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+	margin-left:15px;
+	margin-right:15px;
+	margin-top:36px;
+	border:solid 1px #ccc;
+	position:relative;
+	text-align:center;
+}
+/*
 section.home > div {
 	display:flex;
 	flex-direction:column;
@@ -1136,15 +1195,10 @@ section.home > div {
 	margin-left:15px;
 	margin-right:15px;
 	margin-top:36px;
-	border:solid 1px var(--text-color);
+	border:solid 1px #4b4b4b;
 	position:relative;
 	text-align:center;
-}
-
-section.home p {
-	padding-left:10px;
-	padding-right:10px
-}
+}*/
 
 section.home .bouton {
 	position:relative;
@@ -1154,6 +1208,11 @@ section.home .bouton {
 /*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
+.fond-2 {
+	background-color: #f5f5f5;
+
+}
+
 .sticky {
 	display: block;
 }
@@ -1183,13 +1242,87 @@ section.home .bouton {
 	margin: 0 0 1.5em;
 }
 .page .entry-header {
-	background-color: var(--main-color);
+	background-color: #A80150;
+	background: -webkit-linear-gradient(left, #de004e 0%, #b3043e 100%);
 	background: linear-gradient(90deg, #de004e 0%, #b3043e 100%);
 	text-align:center;
 	color:#fff;
 }
 
+/*Page d'accueil*/
 
+.home .entry-content {
+	margin-top:0
+}
+
+.home-icons.flex-column {
+	-ms-flex-wrap:wrap;
+	    flex-wrap:wrap;
+		/*pour Safari*/
+		max-width:960px;
+}
+
+.home-icons > div {
+	padding:20px 5px 10px 5px;
+	-ms-flex-preferred-size:300px;
+	    flex-basis:300px;
+		/*pour IE*/
+	max-width:300px;
+}
+
+	/*pour IE*/
+ .home-icons > div p, .home-icons > div {
+		max-width:300px;
+  }
+
+@media screen and (min-width:800px) {
+		.home-icons.flex-column {
+	    -webkit-box-pack:justify;
+	        -ms-flex-pack:justify;
+	            justify-content:space-between;
+			-ms-flex-wrap:nowrap;
+			    flex-wrap:nowrap
+			
+  	}
+	/*pour IE*/
+	   .home-icons > div p, .home-icons > div {
+		max-width:200px;
+  		}
+	
+
+	/*		.home-icons > div:nth-child(1) {
+			margin-left:0
+		}
+
+		.home-icons > div:nth-child(4) {
+			margin-right:0
+		}*/
+}
+
+
+.icon-container {
+  padding: 23px 18px;
+	height:80px;
+	width:80px;
+	border: solid 1px #f59e00;
+	border-radius:50%;
+	position:relative;
+	margin:0 auto;
+}
+
+
+
+.home-icons > div:nth-child(3) .icon-container {
+	padding: 22.5px 12px;
+}
+
+.home-icons > div:nth-child(4) .icon-container {
+	padding: 24px 22px;
+}
+
+.home-icons a {
+	text-decoration:none;
+}
 
 /*--------------------------------------------------------------
 ## Comments
@@ -1206,11 +1339,17 @@ section.home .bouton {
 ## Footer
 --------------------------------------------------------------*/
 .footer-widgets {
-	background-color: var(--main-color);
+	background-color: #A80150;
+	background: -webkit-linear-gradient(left, #de004e 0%, #b3043e 100%);
 	background: linear-gradient(90deg, #de004e 0%, #b3043e 100%);
 	color:#fff;
+	display:-webkit-box;
+	display:-ms-flexbox;
 	display:flex;
-	flex-direction:column;
+	-webkit-box-orient:vertical;
+	-webkit-box-direction:normal;
+	    -ms-flex-direction:column;
+	        flex-direction:column;
 	padding :20px
 	
 }
@@ -1232,6 +1371,17 @@ section.home .bouton {
 	font-size:0.86em;
 }
 
+/*Footer à fond clair*/
+.clair .footer-widgets {
+	background:#fff;
+	border-top: solid 1px #A80150
+}
+
+.clair .footer-widgets a {
+	color:#4b4b4b;
+}
+
+
 .footer-widgets a:hover, .footer-widgets a:focus {
 	text-decoration: underline;
 }
@@ -1247,18 +1397,21 @@ section.home .bouton {
 
 @media screen and (min-width: 768px) {
 	.site-footer .widget {
+		margin-left:10px;
+		margin-right:10px
 }
 	.footer-widgets {
-		flex-direction:row;
-		justify-content:space-around;
+		-webkit-box-orient:horizontal;
+		-webkit-box-direction:normal;
+		    -ms-flex-direction:row;
+		        flex-direction:row;
+		-ms-flex-pack:distribute;
+		    justify-content:space-around;
 		padding-bottom:45px;
 	}
 }
 
-#cookie-notice.cn-bottom {
-	width:30%;
-	left:70%;
-}
+
 
 /*--------------------------------------------------------------
 # Infinite scroll
