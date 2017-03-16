@@ -412,6 +412,7 @@ big {
 }
 .icon-twitter:before {
   content: "\e906";
+  color:var(--main-color);
 }
 .icon-circle-o:before {
   content: "\e903";
@@ -1003,6 +1004,7 @@ a[href$=".pdf"]:before {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
 }
 
 /*--------------------------------------------------------------
@@ -1286,7 +1288,7 @@ section.home .bouton {
   	}
 	/*pour IE*/
 	   .home-icons > div p, .home-icons > div {
-		max-width:200px;
+		max-width:198px;
   		}
 	
 
@@ -1324,6 +1326,10 @@ section.home .bouton {
 	text-decoration:none;
 }
 
+.home-icons a:hover, .home-icons a:focus {
+	color:#4b4b4b;
+}
+
 /*--------------------------------------------------------------
 ## Comments
 --------------------------------------------------------------*/
@@ -1338,10 +1344,13 @@ section.home .bouton {
 /*--------------------------------------------------------------
 ## Footer
 --------------------------------------------------------------*/
-.footer-widgets {
+.site-footer {
 	background-color: #A80150;
-	background: -webkit-linear-gradient(left, #de004e 0%, #b3043e 100%);
 	background: linear-gradient(90deg, #de004e 0%, #b3043e 100%);
+
+}
+
+.footer-widgets {
 	color:#fff;
 	display:-webkit-box;
 	display:-ms-flexbox;
@@ -1372,7 +1381,7 @@ section.home .bouton {
 }
 
 /*Footer à fond clair*/
-.clair .footer-widgets {
+.site-footer.clair {
 	background:#fff;
 	border-top: solid 1px #A80150
 }

@@ -26,7 +26,7 @@
 	<header id="masthead" class="site-header" role="banner">
 		<div class="site-branding">
 			<?php
-			if ( is_front_page() && is_home() ) : ?>
+			if ( is_front_page() ) : ?>
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 			<?php else : ?>
 				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
@@ -39,10 +39,10 @@
 			<?php
 			endif; ?>
 			<div class="logo">
-				<a href="/"><img src="/wp-content/uploads/MCEN_logo_1x.png"/></a>
+				<a href="/" title="Accueil"><img src="/wp-content/uploads/MCEN_logo_1x.png" alt="Logo MCEN"/></a>
 			</div>
 			<div class="picto-mobile">
-				<img src="/wp-content/uploads/MCEN_picto.png"/>
+				<img src="/wp-content/uploads/MCEN_picto.png" alt=""/>
 			</div>
 		
 		</div><!-- .site-branding -->
@@ -52,7 +52,7 @@
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"></button>
 			<?php wp_nav_menu( array( 'theme_location' => 'menu-1', 'menu_id' => 'primary-menu' ) ); ?>
 			<div class="picto-desktop">
-				<img src="/wp-content/uploads/MCEN_picto.png"/>
+				<img src="/wp-content/uploads/MCEN_picto.png" alt=""/>
 			</div>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
