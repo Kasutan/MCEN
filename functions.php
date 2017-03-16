@@ -181,3 +181,24 @@ function my_google_font() {
  wp_enqueue_style( $handle = 'my-google-font', $src = 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700|Roboto+Condensed:400,700', $deps = array(), $ver = null, $media = null );
 }
 	
+//Gestion de l'article à la une - A déplacer dans un plugin 
+    add_filter( 'rwmb_meta_boxes', 'mcen_meta_boxes' );
+    function mcen_meta_boxes( $meta_boxes ) {
+        $meta_boxes[] = array(
+            'title'      => __( 'Article à la une', 'mcen_s' ),
+            'post_types' => 'post',
+            'fields'     => array(
+                array(
+                    'id'      => 'a_la_une',
+                    'name'    => __( 'Mettre cet article à la une ?', 'mcen_s' ),
+                    'type'    => 'radio',
+                    'options' => array(
+                        '1' => __( 'Oui', 'mcen_s' ),
+                        '0' => __( 'Non', 'mcen_s' ),
+                    ),
+                )
+               
+            )
+        );
+        return $meta_boxes;
+    }
