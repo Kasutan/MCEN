@@ -682,7 +682,7 @@ a.cn-set-cookie {
 	border-radius:8px
 }
 
-a[href$=".pdf"] {
+.informations a[href$=".pdf"]{
 	   text-decoration: none;
 		 
 	
@@ -694,17 +694,17 @@ a[href$=".pdf"] {
 	display:inline-block;
 }
 
-a[href$=".pdf"] span {
+.informations a[href$=".pdf"] span {
 	  border-bottom : solid 1px #f59e00;
 }
 
-a[href$=".pdf"]:hover span {
+.informations a[href$=".pdf"]:hover span {
 	  color:#fff;
 	 background-color:#f59e00;
 		 padding:0px 3px;
 }
 
-a[href$=".pdf"]:before {
+.informations a[href$=".pdf"]:before {
 	font-family: 'icomoon' !important;
   speak: none;
   font-style: normal;

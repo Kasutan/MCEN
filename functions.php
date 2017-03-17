@@ -202,3 +202,71 @@ function my_google_font() {
         );
         return $meta_boxes;
     }
+
+function un_seul_article_a_la_une( $post_id) {
+	$post_title = get_the_title( $post_id );
+	$post_url = get_permalink( $post_id );
+	$subject = 'A post has been updated';
+
+	$message = "A post has been updated on your website:\n\n";
+	$message .= $post_title . ": " . $post_url;
+
+	
+	
+	//Récupérer les autres articles qui sont marqués à la une
+	$args = array(
+			'post_type' => 'post',
+			'post__not_in'=> array(
+				$post_id
+			),
+			'meta_query' => array(
+				array(
+					'key'     => 'a_la_une',
+					'value'   => '1',
+					'compare' => '=',
+				),
+			)
+		);
+		
+		$query = new WP_Query($args);
+		if($query->have_posts()):
+			$message.="<br>Il y avait d'autres articles à la une, avec les identifiants suivants : ";
+			while($query->have_posts()) :
+				$query->the_post();
+				$id=get_the_ID();
+				$empty_array=array();
+				apply_filters('rwmb_meta','0','a_la_une',$empty_array, $id);
+				update_post_meta($id, 'a_la_une', '0');
+				$message.=$id.' ';
+				$message.="<br>Nouvelle valeur de a_la_une pour cet article : ".rwmb_meta( 'a_la_une', $empty_array, $id);
+			endwhile;
+		endif;
+		wp_reset_postdata();
+
+// Send email to admin.
+	wp_mail( 'contact@kasutan.pro', $subject, $message );
+
+}	
+
+add_action('save_post','un_seul_article_a_la_une');
+
+//Ajouter une colonne dans l'admin 
+function affiche_si_article_a_la_une( $column, $post_id ) {
+    if ($column == 'colonne_a_la_une'){
+		$est_a_la_une = rwmb_meta( 'a_la_une', array(), $post_id);
+		if ($est_a_la_une=='1') {
+			echo 'Oui';
+		} else { 
+			echo 'Non';
+		}
+    }
+}
+add_action( 'manage_posts_custom_column' , 'affiche_si_article_a_la_une', 10, 2 );
+
+
+function ajoute_colonne_a_la_une($columns) {
+    return array_merge( $columns, 
+              array('colonne_a_la_une' => 'A la une') );
+}
+add_filter('manage_posts_columns' , 'ajoute_colonne_a_la_une');
+
