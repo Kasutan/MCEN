@@ -43,7 +43,7 @@
 							<div>
 								<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 								<p class="entry-meta">
-									Posté par <?php the_author(); ?> | Le <?php the_time("j F Y"); ?>
+									Posté par <strong><?php the_author(); ?></strong> | Le <?php the_time("j F Y"); ?>
 								</p> 
 								<?php the_excerpt(); ?>
 								<p>

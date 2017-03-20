@@ -204,48 +204,35 @@ function my_google_font() {
     }
 
 function un_seul_article_a_la_une( $post_id) {
-	$post_title = get_the_title( $post_id );
-	$post_url = get_permalink( $post_id );
-	$subject = 'A post has been updated';
-
-	$message = "A post has been updated on your website:\n\n";
-	$message .= $post_title . ": " . $post_url;
-
-	
-	
-	//Récupérer les autres articles qui sont marqués à la une
-	$args = array(
-			'post_type' => 'post',
-			'post__not_in'=> array(
-				$post_id
-			),
-			'meta_query' => array(
-				array(
-					'key'     => 'a_la_une',
-					'value'   => '1',
-					'compare' => '=',
+	//Vérifier si l'article qu'on vient d'enregistrer doit être à la une
+	if (rwmb_meta('a_la_une', $empty_array, $post_id)=='1')
+	{	//Récupérer les autres articles qui sont marqués à la une
+		$args = array(
+				'post_type' => 'post',
+				'post__not_in'=> array(
+					$post_id
 				),
-			)
-		);
-		
-		$query = new WP_Query($args);
-		if($query->have_posts()):
-			$message.="<br>Il y avait d'autres articles à la une, avec les identifiants suivants : ";
-			while($query->have_posts()) :
-				$query->the_post();
-				$id=get_the_ID();
-				$empty_array=array();
-				apply_filters('rwmb_meta','0','a_la_une',$empty_array, $id);
-				update_post_meta($id, 'a_la_une', '0');
-				$message.=$id.' ';
-				$message.="<br>Nouvelle valeur de a_la_une pour cet article : ".rwmb_meta( 'a_la_une', $empty_array, $id);
-			endwhile;
-		endif;
-		wp_reset_postdata();
-
-// Send email to admin.
-	wp_mail( 'contact@kasutan.pro', $subject, $message );
-
+				'meta_query' => array(
+					array(
+						'key'     => 'a_la_une',
+						'value'   => '1',
+						'compare' => '=',
+					),
+				)
+			);
+			
+			$query = new WP_Query($args);
+			if($query->have_posts()):
+				while($query->have_posts()) :
+					$query->the_post();
+					$id=get_the_ID();
+					$empty_array=array();
+					apply_filters('rwmb_meta','0','a_la_une',$empty_array, $id);
+					update_post_meta($id, 'a_la_une', '0');
+				endwhile;
+			endif;
+			wp_reset_postdata();
+	}
 }	
 
 add_action('save_post','un_seul_article_a_la_une');
@@ -270,3 +257,5 @@ function ajoute_colonne_a_la_une($columns) {
 }
 add_filter('manage_posts_columns' , 'ajoute_colonne_a_la_une');
 
+//Taille d'image pour les articles single 
+add_image_size('single', 435, 325, true ); 
