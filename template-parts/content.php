@@ -24,7 +24,7 @@
 			<div>
 				<?php if ( has_post_thumbnail() ) { the_post_thumbnail('single');}?>
 			</div>
-			<div>
+			<div class="texte">
 				<?php 	the_title( '<h3 class="entry-title">', '</h3>' ); ?>
 				<p class="entry-meta">
 					Posté par <strong><?php the_author(); ?></strong> | Le <?php the_time("j F Y"); ?>

@@ -40,7 +40,7 @@
 							<div>
 								<?php if ( has_post_thumbnail() ) { the_post_thumbnail(array(594,300));}?>
 							</div>
-							<div>
+							<div class="texte">
 								<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 								<p class="entry-meta">
 									Posté par <strong><?php the_author(); ?></strong> | Le <?php the_time("j F Y"); ?>
