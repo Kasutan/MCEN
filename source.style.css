@@ -52,6 +52,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.io/normalize.css/
 	--accent-color:#f59e00;
 	--text-color:#4b4b4b;
 	--back-color: #f5f5f5;
+	--border-color:#cdcdcd;
 }
 
 /*--------------------------------------------------------------
@@ -544,7 +545,7 @@ input[type="submit"] {
 	line-height: 1;
 	padding: .6em 1em .4em;
 }
-
+/*
 button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
@@ -561,7 +562,7 @@ input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active {
 	border-color: #aaa #bbb #bbb;
-}
+}*/
 
 input[type="text"],
 input[type="email"],
@@ -612,6 +613,11 @@ textarea {
 	width: 100%;
 }
 
+.contact .caldera-grid .form-control:focus {
+	border-color:var(--main-color);
+	box-shadow:none; 
+}
+
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
@@ -642,7 +648,8 @@ a:active {
 }
 
 a.bouton, a.cn-set-cookie, 
-button.alm-load-more-btn, button.alm-load-more-btn.done {
+button.alm-load-more-btn, button.alm-load-more-btn.done,
+input[type="submit"].bouton {
 	background-color:#f59e00;
 	color:#fff;
 	font-family: "Roboto Condensed", sans-serif;
@@ -651,6 +658,7 @@ button.alm-load-more-btn, button.alm-load-more-btn.done {
 	text-align: center;
 	border-style: solid;
 	border-width: 1px;
+	border-color:var(--accent-color);
 	padding:10px 38px;
 	border-radius:18px;
   text-transform:uppercase;
@@ -677,7 +685,12 @@ a.bouton:after, button.alm-load-more-btn:after {
 
 a.bouton:hover, a.bouton:focus, 
 a.cn-set-cookie:hover, a.cn-set-cookie:focus, 
-button.alm-load-more-btn:hover, button.alm-load-more-btn:focus {
+button.alm-load-more-btn:hover, 
+button.alm-load-more-btn:focus,
+input.bouton:hover,
+input.bouton:focus,
+input.bouton:active
+ {
 	background-color: #fff;
 	color:#f59e00;
 	border-color:#f59e00;
@@ -1084,11 +1097,23 @@ button.alm-load-more-btn.loading:before {
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
+
+.site {
+	max-width:1200px;
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+	border-left: solid 1px #cdcdcd;
+	border-right: solid 1px #cdcdcd;
+}
+
+
 /*--------------------------------------------------------------
 ## Header
 --------------------------------------------------------------*/
 .site-header {
-	width:100%
+	width:100%;
+	max-width:1198px
 }
 
 .site-branding {
@@ -1657,9 +1682,13 @@ section.home .bouton {
 
 .container.contact {
 	max-width:700px;
-	padding-bottom: 0;
+	padding-bottom: 30px;
 	margin-bottom : 100px;
-	box-shadow:0px 20px 15px -10px #e4e4e4
+	
+}
+
+.contact-1 {
+	box-shadow:0px 20px 15px -10px #e4e4e4;
 }
 
 .contact img {
@@ -1670,12 +1699,35 @@ section.home .bouton {
 }
 .contact .bouton {
 	margin-top: 30px;
-	margin-bottom:30px;
+	margin-bottom:0px;
+	display:inline-block; /*Pour Safari*/
+
 }
 
+
 .contact p {
-	font-size:16px;
+	font-size:1.14em;
 }
+
+.contact .telecharger {
+	padding-top:40px
+}
+
+.contact .telecharger p, .contact .info-champs-requis {
+	font-size:0.87em
+}
+
+.contact .telecharger a {
+	text-decoration:underline;
+}
+
+.contact .telecharger a:hover,
+.contact .telecharger a:focus,
+.contact .telecharger a:active {
+  color:var(--main-color)	
+}
+	
+
 
 .flex-column.bandeau-contact {
 	max-width:100%;
@@ -1713,6 +1765,56 @@ section.home .bouton {
 	.bandeau-contact .texte {
 		min-height:225px;
 		padding-top:65px;
+	}
+}
+/*Page Informations*/
+
+.informations.flex-column {
+	/*Pour IE*/
+	max-width:960px;
+}
+
+
+
+.informations.flex-column .texte {
+	/*Pour IE*/
+	max-width:440px;
+	min-height:1150px;
+}
+
+informations.flex-column .texte > * {
+	/*Pour IE*/
+	max-width:100%;
+}
+
+.informations h2 {
+	margin-top:34px;
+}
+.informations h2:after {
+	content:' ';
+	display:block;
+	background-color: #4b4b4b;
+width: 15px;
+height: 2px;
+	margin:18px 0;
+}
+
+.informations a.bouton {
+	margin-top:18px;
+	display:inline-block;
+	padding-left:17px;
+	padding-right:17px
+}
+
+.informations img {
+max-width:250px;
+}
+
+@media screen and (min-width:768px) {
+	.informations img {
+		margin-top:120px;
+		margin-left:10px;
+		
 	}
 }
 
