@@ -18,7 +18,7 @@
 		
 	<div class="container"> 
 		<?php if (rwmb_meta( 'a_la_une')=='1') {
-			echo "<h2>L'article à la une</h2>";
+			echo "<h2>à la une</h2>";
 		} ?>
 		<div class="entry-content flex-column single 1-1">
 			<div>

@@ -150,6 +150,7 @@ require get_template_directory() . '/inc/jetpack.php';
 remove_action('wp_head', 'wlwmanifest_link');
 remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wp_generator');
+function clean_header(){ wp_deregister_script( 'comment-reply' ); } add_action('init','clean_header');
 
 //Disable jpg compression
 add_filter( 'jpeg_quality', create_function( '', 'return 100;' ) );
@@ -178,84 +179,19 @@ if (function_exists('register_sidebar')) {
 //Google fonts
 add_action( 'wp_enqueue_scripts', 'my_google_font' );
 function my_google_font() {
- wp_enqueue_style( $handle = 'my-google-font', $src = 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700|Roboto+Condensed:400,700', $deps = array(), $ver = null, $media = null );
+ wp_enqueue_style( $handle = 'my-google-font', $src = 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700|Roboto+Condensed:400,700|Roboto', $deps = array(), $ver = null, $media = null );
 }
 	
-//Gestion de l'article à la une - A déplacer dans un plugin 
-    add_filter( 'rwmb_meta_boxes', 'mcen_meta_boxes' );
-    function mcen_meta_boxes( $meta_boxes ) {
-        $meta_boxes[] = array(
-            'title'      => __( 'Article à la une', 'mcen_s' ),
-            'post_types' => 'post',
-            'fields'     => array(
-                array(
-                    'id'      => 'a_la_une',
-                    'name'    => __( 'Mettre cet article à la une ?', 'mcen_s' ),
-                    'type'    => 'radio',
-                    'options' => array(
-                        '1' => __( 'Oui', 'mcen_s' ),
-                        '0' => __( 'Non', 'mcen_s' ),
-                    ),
-                )
-               
-            )
-        );
-        return $meta_boxes;
-    }
-
-function un_seul_article_a_la_une( $post_id) {
-	//Vérifier si l'article qu'on vient d'enregistrer doit être à la une
-	if (rwmb_meta('a_la_une', $empty_array, $post_id)=='1')
-	{	//Récupérer les autres articles qui sont marqués à la une
-		$args = array(
-				'post_type' => 'post',
-				'post__not_in'=> array(
-					$post_id
-				),
-				'meta_query' => array(
-					array(
-						'key'     => 'a_la_une',
-						'value'   => '1',
-						'compare' => '=',
-					),
-				)
-			);
-			
-			$query = new WP_Query($args);
-			if($query->have_posts()):
-				while($query->have_posts()) :
-					$query->the_post();
-					$id=get_the_ID();
-					$empty_array=array();
-					apply_filters('rwmb_meta','0','a_la_une',$empty_array, $id);
-					update_post_meta($id, 'a_la_une', '0');
-				endwhile;
-			endif;
-			wp_reset_postdata();
-	}
-}	
-
-add_action('save_post','un_seul_article_a_la_une');
-
-//Ajouter une colonne dans l'admin 
-function affiche_si_article_a_la_une( $column, $post_id ) {
-    if ($column == 'colonne_a_la_une'){
-		$est_a_la_une = rwmb_meta( 'a_la_une', array(), $post_id);
-		if ($est_a_la_une=='1') {
-			echo 'Oui';
-		} else { 
-			echo 'Non';
-		}
-    }
-}
-add_action( 'manage_posts_custom_column' , 'affiche_si_article_a_la_une', 10, 2 );
-
-
-function ajoute_colonne_a_la_une($columns) {
-    return array_merge( $columns, 
-              array('colonne_a_la_une' => 'A la une') );
-}
-add_filter('manage_posts_columns' , 'ajoute_colonne_a_la_une');
-
 //Taille d'image pour les articles single 
 add_image_size('single', 435, 325, true ); 
+
+//Taille d'image pour les articles de la page actualité qui ne sont pas en vedette
+add_image_size('actu', 290, 220, true ); 
+
+
+//Forcer la traduction des messages d'alerte des formulaires de contact
+function mcen_script_caldera() {
+	echo "<script> setTimeout(function(){ window.Parsley.setLocale('fr'); }, 2000);</script>";
+}
+
+add_action( 'wp_footer', 'mcen_script_caldera', 500);

@@ -32,7 +32,7 @@
 				$query = new WP_Query($args);
 
 				if($query->have_posts()):
-					_e("<h2>L'article à la une</h2>",'mcen_s');
+					_e("<h2>à la une</h2>",'mcen_s');
 					while($query->have_posts()) :
 						$query->the_post();
 						?>
